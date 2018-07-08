@@ -1,6 +1,5 @@
-/Pizza/
+/hello/
 /entity/
-/controller/
-/test/
+/repository/
 /restcontroller/
-/dao/
+/controller/

@@ -1,13 +1,21 @@
 package entity;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
 import org.springframework.data.annotation.Id;
 
 public class Ingredient {
 	@Id
     public String id;
 	
+	@NotNull
 	public String name;
+	@NotNull
+	@PositiveOrZero
 	public int inventory;
+	@NotNull
+	@PositiveOrZero
 	public double price;
 //	boolean basicingredient;
 	

@@ -2,35 +2,26 @@ package entity;
 
 public class Customer {
 
-    private int cid;
-    private String cname;
+    private String name;
     private String phone;
     private String address;
 
     public Customer() {
     }
 
-    public Customer(int cid, String cname, String phone, String address) {
-        this.cid = cid;
-        this.cname = cname;
+    public Customer(String name, String phone, String address) {
+        this.name = name;
         this.phone = phone;
         this.address = address;
     }
 
-    public int getCid() {
-        return cid;
+
+    public String getName() {
+        return name;
     }
 
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
-
-    public String getCname() {
-        return cname;
-    }
-
-    public void setCname(String cname) {
-        this.cname = cname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {
@@ -51,7 +42,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "cid=" + cid + ", cname=" + cname + ", phone=" + phone +", address=" + address + '}';
+        return "Customer{" + ", name=" + name + ", phone=" + phone +", address=" + address + '}';
     }
 
 }
