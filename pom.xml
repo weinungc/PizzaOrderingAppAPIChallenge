@@ -18,6 +18,14 @@
     </properties>
 
     <dependencies>
+   		<!-- <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-security</artifactId>
+		</dependency> -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
@@ -27,11 +35,37 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7</version>
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+	    	<groupId>org.springframework.boot</groupId>
+	    	<artifactId>spring-boot-starter-test</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+		    <groupId>javax.servlet.jsp.jstl</groupId>
+		    <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+		    <version>1.2.1</version>
+		</dependency>
+	    
+	    <dependency>
+		    <groupId>taglibs</groupId>
+		    <artifactId>standard</artifactId>
+		    <version>1.1.2</version>
+		</dependency>
+	    <dependency>
+	    	<groupId>org.apache.tomcat.embed</groupId>
+	    	<artifactId>tomcat-embed-jasper</artifactId>
+	    </dependency>
     </dependencies>
 
     <build>
