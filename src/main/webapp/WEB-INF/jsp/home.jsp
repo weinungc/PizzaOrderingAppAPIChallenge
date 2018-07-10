@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,29 @@ th, td {
 
 
 
-		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
+		<div class="col-md-12" style="text-align: center; margin-top: 20px;" ng:controller="CartForm" >
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>
+						<i class="fa fa-cart-plus"></i> Information
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+					  	<label for="usr">Name:</label>
+					  	<input type="text" class="form-control" ng-model="customer.name">
+					</div>
+					<div class="form-group">
+					  	<label for="usr">Phone:</label>
+					  	<input type="text" class="form-control" ng-model="customer.phone">
+					</div>
+					<div class="form-group">
+					  	<label for="usr">Address:</label>
+					  	<input type="text" class="form-control" ng-model="customer.address">
+					</div>
+				</div>
+				
+			</div>
 			<div class="panel panel-success">
 				<div class="panel-heading">
 					<h3>
@@ -52,7 +75,7 @@ th, td {
 					</h3>
 				</div>
 				<div class="panel-body">
-					<div ng:controller="CartForm">
+					<div>
 						<table class="table">
 							<tr>
 
@@ -61,30 +84,31 @@ th, td {
 								<th>Sauce</th>
 								<th>ingredients</th>
 								<th>Qty</th>
-								<th>Cost</th>
+								<th>Price</th>
 								<th>Total</th>
 								<th></th>
 							</tr>
-							<tr ng:repeat="item in invoice.orderdetails">
-								<td><select ng-model="item.size">
+							<tr ng:repeat="item in order.orderdetails">
+								<td><select ng-model="item.pizza.size">
 										<option ng-repeat="x in size" value="{{x.size}}">{{x.size}}</option>
 								</select></td>
-								<td><select ng-model="item.base">
+								<td><select ng-model="item.pizza.base">
 										<option ng-repeat="x in base" value="{{x}}">{{x}}</option>
 								</select></td>
-								<td><select ng-model="item.sauce">
+								<td><select ng-model="item.pizza.sauce">
 										<option ng-repeat="x in sauce" value="{{x}}">{{x}}</option>
 								</select></td>
 								<td><select multiple class="form-control"
-									ng-model="item.ingredient">
-										<option ng-repeat="x in ingredient" value="{{x.name}}">{{x.name}}</option>
+									ng-model="item.pizza.ingredients">
+										<option ng-repeat="x in ingredients" value="{{x.name}}">{{x.name}}</option>
 								</select></td>
 								<td><input type="number" ng:model="item.qty" ng:required
 									class="input-mini"></td>
-								<td><input type="number" ng:model="item.cost" ng:required
-									class="input-mini">{{eachcost($index)}}</td>
+								<td><input type="number" ng:model="item.pizza.price" ng:required
+									class="input-mini">{{eachprice($index)}}</td>
+									<!-- {{submitOrder()}} -->
 								<!-- <td>{{eachcost($index)}}</td>	 -->
-								<td>{{item.qty * item.cost | currency}}</td>
+								<td>{{item.qty * item.pizza.price | currency}}</td>
 								<td>[<a ng:click="removeItem($index)">X</a>]
 								</td>
 							</tr>
@@ -92,22 +116,24 @@ th, td {
 								<td><a ng:click="addItem()" class="btn btn-small">add
 										item</a></td>
 								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 								<td>Total:</td>
 								<td>{{total() | currency}}</td>
 							</tr>
 							<tfoot>
 								<tr ng-show="cartProduct.length != 0">
 									<td colspan="6" style="text-align: right">
-										<button data-toggle="modal" data-target="#checkoutModal"
-											type="button" ng-show="cartProduct.length != 0"
-											class="btn btn-success">
+										<button data-toggle="modal" ng:click = "submitOrder()"
+											type="button" class="btn btn-success">
 											<i class="fa fa-check"></i> Check Out
 										</button>
 									</td>
 								</tr>
 							</tfoot>
 						</table>
-						</d
+						</d>
 					</div>
 				</div>
 

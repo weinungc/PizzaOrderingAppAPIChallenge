@@ -1,64 +1,106 @@
 angular.module('myApp', []).controller('CartForm',
-		[ '$scope', function($scope) {
+		[ '$scope','$http','$window', function($scope,$http,$window) {
+			
+			//$scope.ingredients ='${ingredients}';
+//			$scope.eachprice = function(index){
+//				console.log($scope.ingredients);
+//				var price = 0;
+//
+//				price += $scope.size.find(x => x.size === $scope.order.orderdetails[index].pizza.size).price;
+//				angular.forEach($scope.order.orderdetails[index].pizza.ingredients,function(eachingredient) {
+//					price += $scope.ingredients.find(x => x.name === eachingredient).price;
+//				})
+//				$scope.order.orderdetails[index].pizza.price = price; 
+//			};
+			
+			$http.get("/ingredient/all")
+		    .then(function(response) {
+		    	$scope.ingredients = response.data;
+		        
+		        $scope.eachprice = function(index){
+					var price = 0;
 
+					price += $scope.size.find(x => x.size === $scope.order.orderdetails[index].pizza.size).price;
+					angular.forEach($scope.order.orderdetails[index].pizza.ingredients,function(eachingredient) {
+						price += $scope.ingredients.find(x => x.name === eachingredient).price;
+					})
+					$scope.order.orderdetails[index].pizza.price = price; 
+				};
+		    });
+			
+			$scope.customer = {name :"",phone:"",address:""};
 			$scope.size =[{size : "small", price : 1}, {size : "medium", price : 2},{size : "big", price : 2.5}];
 
 			$scope.base =["pita","nun","bread"];
 			$scope.sauce =["pesto","bechamel","Salsa"];
-			$scope.ingredient =[
-				{id :"1",name:"cheese",inventory:"100",price:1.0},
-				{id :"2",name:"meatball",inventory:"30",price:3.0},
-				{id :"3",name:"mushroom",inventory:"",price:2.5},
-				{id :"4",name:"tomato",inventory:"",price:100},
-			];
 
-			$scope.invoice = {
+			$scope.totalp =0;
+
+			$scope.order = {
 				orderdetails : [ {
-					size : "medium",
-					base : "pita",
-					sauce : "pesto",
-					ingredient: ["cheese","meatball"],
-					qty : 1,
-					cost : 0
+					pizza :{
+						size : "medium",	
+						base : "pita",
+						sauce : "pesto",
+						ingredients: ["cheese","meatball"],
+						price :0,
+					},
+					qty : 1
 				} ]
 			};
 			$scope.addItem = function() {
-				$scope.invoice.orderdetails.push({
-					size : "medium",
-					base : "pita",
-					sauce : "pesto",
-					ingredient: [],
+				$scope.order.orderdetails.push({
+					pizza :{
+						size : "medium",	
+						base : "pita",
+						sauce : "pesto",
+						ingredients: [],
+						price :0,
+					},
 					qty : 1,
-					cost : 0
 				});
 			};
 
 			$scope.removeItem = function(index) {
-				$scope.invoice.orderdetails.splice(index, 1);
+				$scope.order.orderdetails.splice(index, 1);
 			};
 
-			$scope.eachcost = function(index){
-				var cost = 0;
-
-				cost += $scope.size.find(x => x.size === $scope.invoice.orderdetails[index].size).price;
-				angular.forEach($scope.invoice.orderdetails[index].ingredient,function(eachingredient) {
-					cost += $scope.ingredient.find(x => x.name === eachingredient).price;
-				})
-				$scope.invoice.orderdetails[index].cost = cost; 
-				console.log($scope.invoice);
-			};
 
 			$scope.total = function() {
 				var total = 0;
-				angular.forEach($scope.invoice.orderdetails, function(item) {
-					total += item.qty * item.cost;
+				angular.forEach($scope.order.orderdetails, function(item) {
+					total += item.qty * item.pizza.price;
 				})
+				$scope.totalp =total;
 
 				return total;
 			};
 
 			$scope.submitOrder = function() {
+				var json ={};
+				json.customer = $scope.customer;
+				json.orderdetails = $scope.order.orderdetails;
+			 	json.total = $scope.totalp;
 
-			};
+			 	var parameter = JSON.stringify(json);
+			 	console.log(json);
+//			 	return json
+			 	$http.post("/order", parameter)
+			 	.then(function(response) {
+			 		
+			 		console.log("response here");
+			 		console.log(response);
+			 		$window.alert("Submot success!!")
+			 		$window.location.href = '/weborder/' + response.data.id;
+			 	}).catch(function (data) {
+			 		console.log("error here");
+			 		if(data.status === 400)
+			 			$window.alert("inventory is not enough!!");
+			 		else
+			 			$window.alert("submit fail");
+			 		
+			    });
+			 	
+			 };
 
 		} ]);

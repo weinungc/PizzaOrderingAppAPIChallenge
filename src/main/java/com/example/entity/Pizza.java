@@ -43,7 +43,7 @@ public class Pizza {
 	
 	@Override
 	public String toString() {
-	    return "{size: " + this.size + ", base:\"" + this.base +  "\", sauce:\"" + this.sauce  + "\", price:\"" + this.price+ "\", ingredients:" + this.ingredients+"}";
+	    return "{size: " + this.size + ", base:\"" + this.base +  "\", sauce:\"" + this.sauce  +  "\", ingredients:" + this.ingredients+ "\", price:\"" + this.price+ "}";
 	}
 		
 

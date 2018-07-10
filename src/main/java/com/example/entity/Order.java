@@ -11,8 +11,15 @@ public class Order {
 	
 	Customer customer;
 	List<OrderDetails> orderdetails;
+	double total;
 	
 	
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -32,6 +39,6 @@ public class Order {
 	
 	@Override
 	public String toString() {
-	    return "{id: \"" + this.id + "\", customer:" + this.customer +  ", orderdetails:" + this.orderdetails + "}";
+	    return "{id: \"" + this.id + "\", customer:" + this.customer +  ", orderdetails:" + this.orderdetails + ", total:" + this.total + "}";
 	}
 }

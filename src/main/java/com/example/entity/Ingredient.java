@@ -18,48 +18,58 @@ public class Ingredient {
 	public int inventory;
 	@NotNull
 	@PositiveOrZero
-	public double price;
-//	boolean basicingredient;
-	
-//	public Ingredient(String name , int inventory, double price, boolean basicingredient) {
-//		this.name = name;
-//		this.inventory = inventory;
-//		this.price = price;
-//		this.basicingredient = basicingredient;
-//	}
+	public double price;	
 	
 	
-	public void setName(String name) {
-		this.name = name;
+	
+	public String getId() {
+		return id;
 	}
+
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
 	public String getName() {
 		return name;
 	}
-	public void setInventory (int inventory) {
-		this.inventory = inventory;
+
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
+
 	public int getInventory() {
 		return inventory;
 	}
-	
+
+
+
+	public void setInventory(int inventory) {
+		this.inventory = inventory;
+	}
+
+
+
+	public double getPrice() {
+		return price;
+	}
+
+
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	public double getPrcie() {
-		return inventory;
-	}
-//	public void SetBasicIngredient(boolean basicingredient) {
-//		this.basicingredient = basicingredient;
-//	}
-//	public boolean getBasicIngredient() {
-//		return basicingredient;
-//	}
-	public String getId() {
-		// TODO Auto-generated method stub
-		return id;
-	}
-	
+
+
+
 	@Override
 	public String toString() {
 	    return "{id: \"" + this.id + "\", name:\"" + this.name +  "\", inventory:" + this.inventory  + ", price:" + this.price+"}";

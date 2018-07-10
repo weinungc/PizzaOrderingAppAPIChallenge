@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.entity.Ingredient;
+import com.example.entity.Order;
 import com.example.repository.IngredientRepository;
 
 @RestController
@@ -23,9 +25,11 @@ public class IngredientRestController {
 	private IngredientRepository ingredientRepository;
 
 	@RequestMapping(value = "/ingredient/all", method = RequestMethod.GET)
-	public List<Ingredient> getAllIngredient() {
+	public ResponseEntity<List<Ingredient>> getAllIngredient() {
 		List<Ingredient> listingredient = ingredientRepository.findAll();
-		return listingredient;
+		if (listingredient == null)
+			return new ResponseEntity<List<Ingredient>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Ingredient>>(listingredient, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/ingredient", method = RequestMethod.GET )
@@ -68,7 +72,7 @@ public class IngredientRestController {
 		}
 		ingredient.setInventory(p.getInventory());
 		ingredient.setName(p.getName());
-		ingredient.setPrice(p.getPrcie());
+		ingredient.setPrice(p.getPrice());
 		ingredientRepository.save(ingredient);
 
 		return new ResponseEntity<Ingredient>(ingredient, HttpStatus.OK);

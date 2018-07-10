@@ -53,6 +53,8 @@ public class OrdersRestController {
 	@RequestMapping(value = "/order", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ResponseEntity<Order> saveOrder(@Valid @RequestBody Order order, UriComponentsBuilder ucBuilder) {
 
+		System.out.println("\nmmmmmmmmmm\n");
+		System.out.println(order);
 		// valdiation(check for enough inventory)
 		Map<String, Integer> count = new HashMap<String, Integer>();
 		for (OrderDetails od : order.getOrderdetails()) {
@@ -88,7 +90,7 @@ public class OrdersRestController {
 		}
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/order/{id}").buildAndExpand(order.getId()).toUri());
-		return new ResponseEntity<Order>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<Order>(order,headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
