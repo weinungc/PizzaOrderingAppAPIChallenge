@@ -31,14 +31,13 @@ public class OrdersRestController {
 
 	@Autowired
 	private IngredientRepository ingredientRepository;
-	// private ObjectMapper mapper = new ObjectMapper();
 
 	@RequestMapping(value = "/order/all", method = RequestMethod.GET)
 	public ResponseEntity<List<Order>> getAllOrders() {
 		List<Order> orders = orderRepository.findAll();
 		if (orders == null)
 			return new ResponseEntity<List<Order>>(HttpStatus.NO_CONTENT);
-		
+
 		return new ResponseEntity<List<Order>>(orders, HttpStatus.OK);
 	}
 
@@ -53,8 +52,6 @@ public class OrdersRestController {
 	@RequestMapping(value = "/order", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ResponseEntity<Order> saveOrder(@Valid @RequestBody Order order, UriComponentsBuilder ucBuilder) {
 
-		System.out.println("\nmmmmmmmmmm\n");
-		System.out.println(order);
 		// valdiation(check for enough inventory)
 		Map<String, Integer> count = new HashMap<String, Integer>();
 		for (OrderDetails od : order.getOrderdetails()) {
@@ -90,7 +87,7 @@ public class OrdersRestController {
 		}
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/order/{id}").buildAndExpand(order.getId()).toUri());
-		return new ResponseEntity<Order>(order,headers, HttpStatus.CREATED);
+		return new ResponseEntity<Order>(order, headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
@@ -106,7 +103,7 @@ public class OrdersRestController {
 		for (OrderDetails od : cur_order.getOrderdetails()) {
 			int qty = od.getQty();
 			for (String ig : od.getPizza().getIngredients()) {
-				
+
 				if (count.containsKey(ig)) {
 					count.put(ig, count.get(ig) - qty);
 				} else {
@@ -154,7 +151,7 @@ public class OrdersRestController {
 	}
 
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Order> deleteOrder(@PathVariable("id") String id, @RequestBody Order order) {
+	public ResponseEntity<Order> deleteOrder(@PathVariable("id") String id) {
 		Order cur_order = orderRepository.findById(id).get();
 
 		if (cur_order == null)

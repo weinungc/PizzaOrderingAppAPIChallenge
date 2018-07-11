@@ -1,17 +1,6 @@
 angular.module('myApp', []).controller('CartForm',
 		[ '$scope','$http','$window', function($scope,$http,$window) {
-			
-			//$scope.ingredients ='${ingredients}';
-//			$scope.eachprice = function(index){
-//				console.log($scope.ingredients);
-//				var price = 0;
-//
-//				price += $scope.size.find(x => x.size === $scope.order.orderdetails[index].pizza.size).price;
-//				angular.forEach($scope.order.orderdetails[index].pizza.ingredients,function(eachingredient) {
-//					price += $scope.ingredients.find(x => x.name === eachingredient).price;
-//				})
-//				$scope.order.orderdetails[index].pizza.price = price; 
-//			};
+
 			
 			$http.get("/ingredient/all")
 		    .then(function(response) {
@@ -30,19 +19,16 @@ angular.module('myApp', []).controller('CartForm',
 			
 			$scope.customer = {name :"",phone:"",address:""};
 			$scope.size =[{size : "small", price : 1}, {size : "medium", price : 2},{size : "big", price : 2.5}];
-
 			$scope.base =["pita","nun","bread"];
 			$scope.sauce =["pesto","bechamel","Salsa"];
-
 			$scope.totalp =0;
-
 			$scope.order = {
 				orderdetails : [ {
 					pizza :{
 						size : "medium",	
 						base : "pita",
 						sauce : "pesto",
-						ingredients: ["cheese","meatball"],
+						ingredients: [],
 						price :0,
 					},
 					qty : 1
@@ -75,7 +61,9 @@ angular.module('myApp', []).controller('CartForm',
 
 				return total;
 			};
-
+			
+			
+//			function for submit order
 			$scope.submitOrder = function() {
 				var json ={};
 				json.customer = $scope.customer;
@@ -83,17 +71,13 @@ angular.module('myApp', []).controller('CartForm',
 			 	json.total = $scope.totalp;
 
 			 	var parameter = JSON.stringify(json);
-			 	console.log(json);
-//			 	return json
+			 	
 			 	$http.post("/order", parameter)
 			 	.then(function(response) {
 			 		
-			 		console.log("response here");
-			 		console.log(response);
-			 		$window.alert("Submot success!!")
+			 		$window.alert("Submit success!!")
 			 		$window.location.href = '/weborder/' + response.data.id;
 			 	}).catch(function (data) {
-			 		console.log("error here");
 			 		if(data.status === 400)
 			 			$window.alert("inventory is not enough!!");
 			 		else

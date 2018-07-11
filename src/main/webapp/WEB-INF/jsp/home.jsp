@@ -45,7 +45,8 @@ th, td {
 
 
 
-		<div class="col-md-12" style="text-align: center; margin-top: 20px;" ng:controller="CartForm" >
+		<div class="col-md-12" style="text-align: center; margin-top: 20px;"
+			ng:controller="CartForm">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3>
@@ -54,19 +55,19 @@ th, td {
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
-					  	<label for="usr">Name:</label>
-					  	<input type="text" class="form-control" ng-model="customer.name">
+						<label for="usr">Name:</label> <input type="text"
+							class="form-control" ng-model="customer.name" ng:required>
 					</div>
 					<div class="form-group">
-					  	<label for="usr">Phone:</label>
-					  	<input type="text" class="form-control" ng-model="customer.phone">
+						<label for="usr">Phone:</label> <input type="text"
+							class="form-control" ng-model="customer.phone" ng:required>
 					</div>
 					<div class="form-group">
-					  	<label for="usr">Address:</label>
-					  	<input type="text" class="form-control" ng-model="customer.address">
+						<label for="usr">Address:</label> <input type="text"
+							class="form-control" ng-model="customer.address" ng:required>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="panel panel-success">
 				<div class="panel-heading">
@@ -104,9 +105,9 @@ th, td {
 								</select></td>
 								<td><input type="number" ng:model="item.qty" ng:required
 									class="input-mini"></td>
-								<td><input type="number" ng:model="item.pizza.price" ng:required
-									class="input-mini">{{eachprice($index)}}</td>
-									<!-- {{submitOrder()}} -->
+								<td><input type="number" ng:model="item.pizza.price"
+									ng:required class="input-mini">{{eachprice($index)}}</td>
+								<!-- {{submitOrder()}} -->
 								<!-- <td>{{eachcost($index)}}</td>	 -->
 								<td>{{item.qty * item.pizza.price | currency}}</td>
 								<td>[<a ng:click="removeItem($index)">X</a>]
@@ -125,7 +126,7 @@ th, td {
 							<tfoot>
 								<tr ng-show="cartProduct.length != 0">
 									<td colspan="6" style="text-align: right">
-										<button data-toggle="modal" ng:click = "submitOrder()"
+										<button data-toggle="modal" ng:click="submitOrder()"
 											type="button" class="btn btn-success">
 											<i class="fa fa-check"></i> Check Out
 										</button>
@@ -133,7 +134,7 @@ th, td {
 								</tr>
 							</tfoot>
 						</table>
-						</d>
+
 					</div>
 				</div>
 
@@ -164,8 +165,9 @@ th, td {
                 </div>
             </div> --%>
 
-
 			</div>
+		</div>
+	</div>
 </body>
 
 

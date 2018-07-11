@@ -2,16 +2,12 @@ package com.example.entity;
 
 public class OrderDetails {
 
-	
-//	@Id
-//    private Long id;
 	Pizza pizza;
 	private int qty;
-    private double price;
-    
+	private double price;
 
-    public OrderDetails() {
-    }
+	public OrderDetails() {
+	}
 
 	public Pizza getPizza() {
 		return pizza;
@@ -39,7 +35,7 @@ public class OrderDetails {
 
 	@Override
 	public String toString() {
-	    return "{pizza: " + this.pizza + ", qty:" + this.qty +  ", price:" + this.price + "}";
+		return "{pizza: " + this.pizza + ", qty:" + this.qty + ", price:" + this.price + "}";
 	}
 
 }

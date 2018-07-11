@@ -94,7 +94,7 @@
 								<td>${order.total}</td>
 							</tr>
 						</table>
-						</d>
+						
 					</div>
 				</div>
 

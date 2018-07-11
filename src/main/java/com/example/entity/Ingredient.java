@@ -1,6 +1,5 @@
 package com.example.entity;
 
-import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
