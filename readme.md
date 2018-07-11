@@ -39,7 +39,7 @@ To start the project, you can run the command in project folder
 ./mvnw spring-boot:run
 ```
 
-you will nee to [add ingredients](http://localhost:8080/webingredient) before [post an order](http://localhost:8080/)
+you will need to [add ingredients](http://localhost:8080/webingredient) before [post an order](http://localhost:8080/)
 
  - OrderPage: http://localhost:8080/
  - OrderDetail:http://localhost:8080/weborder/{id}
