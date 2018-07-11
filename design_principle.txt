@@ -1,0 +1,37 @@
+I am using Java/Spring with MVC design principle.
+
+//web part
+Model is connecting with mongoDB, and using nested object to create table.
+	1.Objects contain: ingredient, pizza, orderdetail, order and customer.
+	2.Table s contain: order and ingredient.
+
+Controller is handeling all the uri request, do some valdiation and put attribute to viev. I also put some valdiation on model part.
+	1.controller do the inventory check and deduct them 
+	2.it also connect the repository to connect with model.
+	3.inplement multiple function such as find, add or webview
+	4.I also put the price part separately for scalable in the future.and implement on coupon(create table coupon then can implement on each pizza or each order detail)
+
+View is about getting attribute and connect to template "JSP" and shouwing pages.
+	1.I am using on using AngularJS to the dynamic calculate and showing.
+	2.Sent with JSON file to do the communication.
+	3.There is also cart function and ingredient, size or base choose.
+	4.The price will be decide from the items you customize and query price from database.
+	5.you can add as much ingredients as you want.
+
+//rest api aprt
+The design principle is about http standard (GET,POST,PUT,DELETE) and status code to design.
+	1.implement 2 tables to do the query
+	2.will control the inventory and auto deduct those when order is post or put
+	3.it support multiple function such as findbyname or find by id to get the data you want
+	4.support JSON format 
+
+
+//junit part
+	1.test all the function in rest api
+	2.test with creat, query, put and delete
+	3.test all the tables
+	4.check all the status code foreach test
+	
+//other part
+	1.use maven to controll the dependency and API the project need
+	2.use bootstrap for UI component part
